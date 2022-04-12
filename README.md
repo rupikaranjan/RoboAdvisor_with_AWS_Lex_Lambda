@@ -20,59 +20,59 @@ Robotic Investment Advisor using Amazon AWS Lex and Lambda to get investment por
 
 ### Configure the initial robo advisor
 
-    1. A new custom Amazon Lex bot is created with certain criteria
-        * Bot name: RoboAdvisor
-        * Language: English (US)
-        * Output voice: Salli
-        * Session timeout: 5 minutes
-        * Sentiment analysis: No
-        * COPPA: No
-        * Advanced options: No
-        * All other options: The default value
+1. A new custom Amazon Lex bot is created with certain criteria
+    * Bot name: RoboAdvisor
+    * Language: English (US)
+    * Output voice: Salli
+    * Session timeout: 5 minutes
+    * Sentiment analysis: No
+    * COPPA: No
+    * Advanced options: No
+    * All other options: The default value
 
-    2. A new intent named `recommendPortfolio` is added.
+2. A new intent named `recommendPortfolio` is added.
 
-    3. Sample utterances are configured as follows :
-        * I want to save money for my retirement
-        * I'm {age} and I would like to invest for my retirement
-        * I'm ​{age} and I want to invest for my retirement
-        * I want the best option to invest for my retirement
-        * I'm worried about my retirement
-        * I want to invest for my retirement
-        * I would like to invest for my retirement
-    
-    4. Four slots are created 
+3. Sample utterances are configured as follows :
+    * I want to save money for my retirement
+    * I'm {age} and I would like to invest for my retirement
+    * I'm ​{age} and I want to invest for my retirement
+    * I want the best option to invest for my retirement
+    * I'm worried about my retirement
+    * I want to invest for my retirement
+    * I would like to invest for my retirement
 
-    ![slots](Images/slots.png)
+4. Four slots are created 
 
-    5. In the `Confirmation prompt` section set the following messages:
-        * Confirm: Thanks, now I will look for the best investment portfolio for you.
-        * Cancel: I will be pleased to assist you in the future.
+![slots](Images/slots.png)
+
+5. In the `Confirmation prompt` section set the following messages:
+    * Confirm: Thanks, now I will look for the best investment portfolio for you.
+    * Cancel: I will be pleased to assist you in the future.
 
 ### Build and test the robo advisor
 
-    Build and test the lex bot. The following is an exmaple conversation : 
+Build and test the lex bot. The following is an exmaple conversation : 
 
-    ![ra_phase1](Images/ra_phase1.gif)
+![ra_phase1](Images/ra_phase1.gif)
 
 ### Enhance the robo advisor with an Amazon Lambda function
 
-    A Lambda Function is created to validate the data the suer supllies during a conversation with the robo advisor bot.
+A Lambda Function is created to validate the data the suer supllies during a conversation with the robo advisor bot.
 
-        1. A Lambda Function named `recommendPortfolio` is created with Python 3.7 as the runtime programming language.
+1. A Lambda Function named `recommendPortfolio` is created with Python 3.7 as the runtime programming language.
 
-        2. A `recommend_portfolio` function is added with validation for `age` and `investment_amount`.
+2. A `recommend_portfolio` function is added with validation for `age` and `investment_amount`.
 
-        3. The lambda function returns the following recommendation based on the selected risk level as follows:
-            * None: “100% bonds (AGG), 0% equities (SPY)”
-            * Low: “60% bonds (AGG), 40% equities (SPY)”
-            * Medium: “40% bonds (AGG), 60% equities (SPY)”
-            * High: “20% bonds (AGG), 80% equities (SPY)”
-        
-        4. The lambda function is tested with test events in folder named `Test_Events`
+3. The lambda function returns the following recommendation based on the selected risk level as follows:
+    * None: “100% bonds (AGG), 0% equities (SPY)”
+    * Low: “60% bonds (AGG), 40% equities (SPY)”
+    * Medium: “40% bonds (AGG), 60% equities (SPY)”
+    * High: “20% bonds (AGG), 80% equities (SPY)”
 
-        5. The new Lmabda function is integrated into the bot by selecting `recommendPortfolio` in the `Lambda initialization and validation` and `Fulfillment` sections.
+4. The lambda function is tested with test events in folder named `Test_Events`
 
-        6. The bot is then  built and tested with  both valid and invalid data for the slots.
+5. The new Lmabda function is integrated into the bot by selecting `recommendPortfolio` in the `Lambda initialization and validation` and `Fulfillment` sections.
 
-        ![ra_phase2](Images/ra_phase2.gif)
+6. The bot is then  built and tested with  both valid and invalid data for the slots.
+
+![ra_phase2](Images/ra_phase2.gif)
